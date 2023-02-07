@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentSysUserMapper">
+  <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentSysUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="agent_id" jdbcType="BIGINT" property="agentId" />
+    <result column="sys_user_id" jdbcType="BIGINT" property="sysUserId" />
+    <result column="flag" jdbcType="TINYINT" property="flag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, agent_id, sys_user_id, flag, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_agent_sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentSysUser">
+    insert into o_agent_sys_user (id, agent_id, sys_user_id, 
+      flag, create_time)
+    values (#{id,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{sysUserId,jdbcType=BIGINT}, 
+      #{flag,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.credit.oem.admin.modules.agent.entity.AgentSysUser">
+    insert into o_agent_sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="sysUserId != null">
+        #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentSysUser">
+    update o_agent_sys_user
+    <set>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id = #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentSysUser">
+    update o_agent_sys_user
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      sys_user_id = #{sysUserId,jdbcType=BIGINT},
+      flag = #{flag,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryListByAgentId" parameterType="HashMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_agent_sys_user
+    where agent_id = #{agentId}
+  </select>
+
+  <select id="queryMasterSysUserByAgentId" parameterType="HashMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_agent_sys_user
+    where agent_id = #{agentId} and flag=0
+  </select>
+
+  <select id="queryOneBySysUserId" parameterType="HashMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_agent_sys_user
+    where sys_user_id = #{sysUserId}
+  </select>
+
+  <select id="queryAgentSysUserDataListByMobileAndUserIdList" parameterType="HashMap" resultType="com.credit.oem.admin.modules.agent.model.data.AgentSysUserData">
+    select sys.user_id as userId,sys.real_name as realName,sys.mobile,sys.email,
+    sys.create_time as createTime,ag.flag,sys.status,
+    case when sys.status=1 then "正常" else "禁用" end as statusName
+    from o_sys_user as sys inner join o_agent_sys_user as ag on sys.user_id = ag.sys_user_id
+    where sys.user_id in
+    <foreach item="item" index="index" collection="sysUserIdList" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="mobile != null and mobile !=''">
+      and sys.mobile like concat('%',#{mobile},'%')
+    </if>
+  </select>
+
+</mapper>

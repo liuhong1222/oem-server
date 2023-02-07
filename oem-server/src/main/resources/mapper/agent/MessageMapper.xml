@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.Message">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId"/>
+        <result column="createdate" jdbcType="DATE" property="createdate"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="isread" jdbcType="CHAR" property="isread"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="createby" jdbcType="VARCHAR" property="createby"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="lastrepair" jdbcType="VARCHAR" property="lastrepair"/>
+        <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime"/>
+        <result column="agent_id" jdbcType="BIGINT" property="agentId"/>
+        <result column="agent_message_id" jdbcType="BIGINT" property="agentMessageId"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.credit.oem.admin.modules.agent.entity.Message">
+        <result column="message" jdbcType="LONGVARCHAR" property="message"/>
+    </resultMap>
+    <sql id="Blob_Column_List">
+    message
+  </sql>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.Message">
+    insert into message (id, customer_id, createdate, 
+      title, type, isread, flag, 
+      createby, createtime, lastrepair, 
+      lasttime, message,agent_id,agent_message_id)
+    values (#{id,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, 
+      #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{isread,jdbcType=CHAR}, #{flag,jdbcType=INTEGER}, 
+      #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastrepair,jdbcType=VARCHAR}, 
+      #{lasttime,jdbcType=TIMESTAMP}, #{message,jdbcType=LONGVARCHAR}, #{agentId,jdbcType=BIGINT}, #{agentMessageId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.Message">
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="isread != null">
+                isread,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="createby != null">
+                createby,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="lastrepair != null">
+                lastrepair,
+            </if>
+            <if test="lasttime != null">
+                lasttime,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+            <if test="agentMessageId != null">
+                agent_message_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=DATE},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="isread != null">
+                #{isread,jdbcType=CHAR},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="createby != null">
+                #{createby,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastrepair != null">
+                #{lastrepair,jdbcType=VARCHAR},
+            </if>
+            <if test="lasttime != null">
+                #{lasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="agentMessageId != null">
+                #{agentMessageId,jdbcType=BIGINT},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selectMessageByCreateAndTitle" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+      id, customer_id, createdate,
+      title, type, isread, flag,
+      createby, createtime, lastrepair,
+      lasttime, message,agent_id,agent_message_id
+    from message
+    where title=#{title,jdbcType=LONGVARCHAR}
+    and createby= #{createby}
+    order by createtime desc
+    limit 1
+  </select>
+
+    <insert id="insertBatch" parameterType="list">
+        insert into message (id, customer_id, createdate,
+        title, type, isread, flag,
+        createby, createtime, lastrepair,
+        lasttime, message,agent_id,agent_message_id)
+        values
+        <foreach collection="collection" item="item" separator=",">
+            (#{item.id,jdbcType=VARCHAR}, #{item.customerId,jdbcType=VARCHAR}, #{item.createdate,jdbcType=DATE},
+            #{item.title,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR}, #{item.isread,jdbcType=CHAR},
+            #{item.flag,jdbcType=INTEGER},
+            #{item.createby,jdbcType=VARCHAR}, #{item.createtime,jdbcType=TIMESTAMP},
+            #{item.lastrepair,jdbcType=VARCHAR},
+            #{item.lasttime,jdbcType=TIMESTAMP}, #{item.message,jdbcType=LONGVARCHAR},
+            #{item.agentId,jdbcType=BIGINT}, #{item.agentMessageId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
+    <update id="modifyByAgentMessageId" parameterType="java.util.Map">
+        update message
+        <set>
+            title = #{title,jdbcType=VARCHAR},
+            message = #{message,jdbcType=LONGVARCHAR},
+            lastrepair = #{updater},
+            lasttime = NOW(),
+            type = #{type}
+        </set>
+        where agent_id = #{agentId}
+        and agent_message_id = #{agentMessageId}
+        and flag = 0
+    </update>
+
+    <update id="approvedMessage" parameterType="java.util.Map">
+        update message
+        <set>
+            flag=1
+        </set>
+        where agent_message_id = #{agentMessageId}
+        and flag = 0
+    </update>
+
+    <update id="deleteMessage" parameterType="java.util.Map">
+        update message
+        <set>
+            flag=0
+        </set>
+        where agent_message_id = #{agentMessageId}
+        and flag = 1
+    </update>
+
+    <select id="selectMobileListByAgentMessageId" parameterType="java.util.Map" resultType="java.lang.String">
+        select cre_user.user_phone as mobile
+        from message
+        inner join cre_user on message.customer_id = cre_user.id
+        where message.agent_message_id = #{agentMessageId}
+    </select>
+
+</mapper>

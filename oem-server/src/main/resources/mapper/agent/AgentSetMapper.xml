@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentSetMapper">
+
+
+    <select id="agentSetList" parameterType="com.credit.oem.admin.modules.agent.model.param.AgentSetListParam"
+            resultType="java.util.Map">
+        SELECT t1.id as agentId,t1.agent_no,t1.mch_id,t1.company_name,t1.create_time,
+        t2.icon_url,t2.logo_url,t2.sms_sign,
+        t4.icp_record,t4.police_record,t4.licence,t4.name as domain,
+        t5.hotline,t5.qq,t5.biz_no,
+        t6.mchid as wxMchid,t6.call_url as wxcall_url,t6.callback_url AS wxcallback_url,t6.appid AS wxappid,t6.wxkey as
+        wxKey,
+        t7.appid as aliAppid,t7.callback_url as alicallback_url,t7.call_url as alicall_url,t7.public_key as
+        alipublic_key,t7.private_key as aliprivate_key,
+        t8.company_name as htcompany_name,t8.company_address as htcompany_address,t8.account_no as
+        htaccount_no,t8.bank_name as htbank_name,
+        t8.postcode as htpostcode,t8.mobile as htmobile,
+        t8.sign_url,t8.seal_url,t1.audit_state as auditState,t1.mobile as agentMobile,
+        t9.appid as wxLoginAppid ,t9.app_secret as wxLoginAppSecret
+        from o_agent t1 left JOIN o_agent_website t2 on t1.id=t2.agent_id
+        left join o_agent_domain t4 on t1.id=t4.agent_id
+        LEFT JOIN o_agent_cust_service t5 on t1.id=t5.agent_id
+        LEFT JOIN o_agent_weixinpay t6 on t1.id=t6.agent_id
+        LEFT JOIN o_agent_alipay t7 on t1.id=t7.agent_id
+        LEFT JOIN o_agent_contract t8 on t1.id=t8.agent_id
+        LEFT JOIN o_agent_wx_login t9 on t1.id=t9.agent_id
+        where t1.delete_flag=1 and 1=1
+        <if test="startTimeStr!=null and  startTimeStr!=''">
+            and t1.create_time >=#{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null  and  endTimeStr!=''">
+            and t1.create_time &lt;=#{endTimeStr}
+        </if>
+        <if test="agentName!=null  and  agentName!=''">
+            and t1.company_name like concat("%",#{agentName},"%")
+        </if>
+        <if test="auditState!=null and  auditState!='' or auditState==0">
+            and t1.audit_state = #{auditState}
+        </if>
+        <if test="agentMobile!=null and  agentMobile!=''">
+            and t1.mobile like concat('%',#{agentMobile},'%')
+        </if>
+    </select>
+
+    <select id="findBasicInfo" parameterType="java.lang.Long"
+            resultType="java.util.Map">
+        SELECT
+        t1.id AS agentId,
+        t1.agent_no,
+        t1.company_name,
+        t2.icon_url,
+        t2.logo_url,
+        t2.sms_sign,
+        t4.`name`,
+        t8.sign_url,
+        t8.seal_url
+        FROM
+        o_agent t1 left JOIN o_agent_website t2 on t1.id=t2.agent_id
+        LEFT JOIN o_agent_domain t4 ON t1.id = t4.agent_id
+        LEFT JOIN o_agent_contract t8 ON t1.id = t8.agent_id
+        WHERE
+        t1.delete_flag=1  and
+        t1. id=#{agentId}
+
+    </select>
+
+
+
+</mapper>

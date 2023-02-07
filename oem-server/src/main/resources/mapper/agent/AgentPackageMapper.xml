@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentPackageMapper">
+  <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentPackage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="agent_id" jdbcType="BIGINT" property="agentId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="package_id" jdbcType="BIGINT" property="packageId" />
+    <result column="package_name" jdbcType="VARCHAR" property="packageName" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="discout" jdbcType="DECIMAL" property="discout" />
+    <result column="original_cost" jdbcType="DECIMAL" property="originalCost" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, agent_id, product_id,package_id, package_name, number, money, order_code, discout, original_cost,
+    order_no, is_deleted, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_agent_package
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_package
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentPackage">
+    insert into o_agent_package (id, agent_id, product_id,package_id,
+      package_name, number, money, 
+      order_code, discout, original_cost, 
+      order_no, is_deleted, create_time, 
+      update_time,package_id)
+    values (#{id,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{packageId,jdbcType=BIGINT},
+      #{packageName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{orderCode,jdbcType=VARCHAR}, #{discout,jdbcType=DECIMAL}, #{originalCost,jdbcType=DECIMAL}, 
+      #{orderNo,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP},#{package_id,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.credit.oem.admin.modules.agent.entity.AgentPackage">
+    insert into o_agent_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="packageName != null">
+        package_name,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="discout != null">
+        discout,
+      </if>
+      <if test="originalCost != null">
+        original_cost,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=BIGINT},
+      </if>
+      <if test="packageName != null">
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discout != null">
+        #{discout,jdbcType=DECIMAL},
+      </if>
+      <if test="originalCost != null">
+        #{originalCost,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentPackage">
+    update o_agent_package
+    <set>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=BIGINT},
+      </if>
+      <if test="packageName != null">
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="discout != null">
+        discout = #{discout,jdbcType=DECIMAL},
+      </if>
+      <if test="originalCost != null">
+        original_cost = #{originalCost,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentPackage">
+    update o_agent_package
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      package_id = #{packageId,jdbcType=BIGINT},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      discout = #{discout,jdbcType=DECIMAL},
+      original_cost = #{originalCost,jdbcType=DECIMAL},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByAgentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from o_agent_package
+    where agent_id = #{agentId}
+    and product_id=1
+  </select>
+
+  <select id="findOne" resultMap="BaseResultMap">
+  	select
+    <include refid="Base_Column_List"/>
+    from o_agent_package
+    where agent_id = #{agentId}
+    and product_id=1 and package_id = 4
+    limit 0,1
+  </select>
+  
+  <insert id="insertByAgentId" >
+    insert into o_agent_package (id, agent_id, product_id,package_id,
+      package_name, number, money, order_code, discout, original_cost, 
+      order_no, is_deleted, create_time, update_time)
+    SELECT null id ,#{agentId} agent_id, `product_id`, `package_id`, `package_name`, `number`, `money`, `order_code`, `discout`,
+           `original_cost`, `order_no`, `is_deleted`, NOW() `create_time`, NOW()  `update_time`
+	from o_agent_package
+	where agent_id = 0
+  </insert>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentWxLoginMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentWxLogin">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="agent_id" jdbcType="BIGINT" property="agentId"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="app_secret" jdbcType="VARCHAR" property="appSecret"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, agent_id, appid, app_secret, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from o_agent_wx_login
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_wx_login
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentWxLogin">
+    insert into o_agent_wx_login (id, agent_id, appid, 
+      app_secret, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{appid,jdbcType=VARCHAR}, 
+      #{appSecret,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentWxLogin">
+        insert into o_agent_wx_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+            <if test="appid != null">
+                appid,
+            </if>
+            <if test="appSecret != null">
+                app_secret,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="appSecret != null">
+                #{appSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentWxLogin">
+        update o_agent_wx_login
+        <set>
+            <if test="agentId != null">
+                agent_id = #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="appid != null">
+                appid = #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="appSecret != null">
+                app_secret = #{appSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentWxLogin">
+    update o_agent_wx_login
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      appid = #{appid,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByAgentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        t1.*
+        from o_agent_wx_login t1 LEFT JOIN o_agent t2 on t1.agent_id=t2.id
+        where t1.agent_id = #{agentId}  and t2.delete_flag=1
+    </select>
+</mapper>

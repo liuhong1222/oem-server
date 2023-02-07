@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentAuditRecordMapper">
+  <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentAuditRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="agent_id" jdbcType="BIGINT" property="agentId" />
+    <result column="audit_state" jdbcType="INTEGER" property="auditState" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sys_user_id" jdbcType="BIGINT" property="sysUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, agent_id, audit_state, remark, sys_user_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_agent_audit_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_audit_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentAuditRecord">
+    insert into o_agent_audit_record (id, agent_id, audit_state, 
+      remark, sys_user_id, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{auditState,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{sysUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.credit.oem.admin.modules.agent.entity.AgentAuditRecord">
+    insert into o_agent_audit_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="auditState != null">
+        audit_state,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="auditState != null">
+        #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysUserId != null">
+        #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentAuditRecord">
+    update o_agent_audit_record
+    <set>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="auditState != null">
+        audit_state = #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysUserId != null">
+        sys_user_id = #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentAuditRecord">
+    update o_agent_audit_record
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      audit_state = #{auditState,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      sys_user_id = #{sysUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryLastOneOfRejectedByAgentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_agent_audit_record
+    where audit_state = 2 and agent_id = #{agentId}
+    order by id desc limit 1
+  </select>
+
+</mapper>

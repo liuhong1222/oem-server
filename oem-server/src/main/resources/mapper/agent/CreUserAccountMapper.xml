@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.CreUserAccountMapper">
+  <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cre_user_id" jdbcType="INTEGER" property="creUserId" />
+    <result column="account" jdbcType="INTEGER" property="account" />
+    <result column="api_account" jdbcType="INTEGER" property="apiAccount" />
+    <result column="rq_account" jdbcType="INTEGER" property="rqAccount" />
+    <result column="tc_account" jdbcType="INTEGER" property="tcAccount" />
+    <result column="fc_account" jdbcType="INTEGER" property="fcAccount" />
+    <result column="ms_account" jdbcType="INTEGER" property="msAccount" />
+    <result column="ct_account" jdbcType="INTEGER" property="ctAccount" />
+    <result column="fi_account" jdbcType="INTEGER" property="fiAccount" />
+    <result column="ff_account" jdbcType="INTEGER" property="ffAccount" />
+    <result column="cl_account" jdbcType="INTEGER" property="clAccount" />
+    <result column="idocr_account" jdbcType="INTEGER" property="idocrAccount" />
+    <result column="blocr_account" jdbcType="INTEGER" property="blocrAccount" />
+    <result column="bocr_account" jdbcType="INTEGER" property="bocrAccount" />
+    <result column="docr_account" jdbcType="INTEGER" property="docrAccount" />
+    <result column="delete_status" jdbcType="VARCHAR" property="deleteStatus" />
+    <result column="is_frozen" jdbcType="INTEGER" property="isFrozen" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cre_user_id, account, api_account, rq_account, tc_account, fc_account, ms_account, 
+    ct_account, fi_account, ff_account, cl_account, idocr_account, blocr_account, bocr_account, 
+    docr_account, delete_status,is_frozen, version, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cre_user_account
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cre_user_account
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+    insert into cre_user_account (id, cre_user_id, account, 
+      api_account, rq_account, tc_account, 
+      fc_account, ms_account, ct_account, 
+      fi_account, ff_account, cl_account, 
+      idocr_account, blocr_account, bocr_account, 
+      docr_account, delete_status,is_frozen, version,
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{creUserId,jdbcType=INTEGER}, #{account,jdbcType=INTEGER}, 
+      #{apiAccount,jdbcType=INTEGER}, #{rqAccount,jdbcType=INTEGER}, #{tcAccount,jdbcType=INTEGER}, 
+      #{fcAccount,jdbcType=INTEGER}, #{msAccount,jdbcType=INTEGER}, #{ctAccount,jdbcType=INTEGER}, 
+      #{fiAccount,jdbcType=INTEGER}, #{ffAccount,jdbcType=INTEGER}, #{clAccount,jdbcType=INTEGER}, 
+      #{idocrAccount,jdbcType=INTEGER}, #{blocrAccount,jdbcType=INTEGER}, #{bocrAccount,jdbcType=INTEGER}, 
+      #{docrAccount,jdbcType=INTEGER}, #{deleteStatus,jdbcType=VARCHAR},#{isFrozen,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+    insert into cre_user_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creUserId != null">
+        cre_user_id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="apiAccount != null">
+        api_account,
+      </if>
+      <if test="rqAccount != null">
+        rq_account,
+      </if>
+      <if test="tcAccount != null">
+        tc_account,
+      </if>
+      <if test="fcAccount != null">
+        fc_account,
+      </if>
+      <if test="msAccount != null">
+        ms_account,
+      </if>
+      <if test="ctAccount != null">
+        ct_account,
+      </if>
+      <if test="fiAccount != null">
+        fi_account,
+      </if>
+      <if test="ffAccount != null">
+        ff_account,
+      </if>
+      <if test="clAccount != null">
+        cl_account,
+      </if>
+      <if test="idocrAccount != null">
+        idocr_account,
+      </if>
+      <if test="blocrAccount != null">
+        blocr_account,
+      </if>
+      <if test="bocrAccount != null">
+        bocr_account,
+      </if>
+      <if test="docrAccount != null">
+        docr_account,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="isFrozen != null">
+        is_frozen,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="creUserId != null">
+        #{creUserId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=INTEGER},
+      </if>
+      <if test="apiAccount != null">
+        #{apiAccount,jdbcType=INTEGER},
+      </if>
+      <if test="rqAccount != null">
+        #{rqAccount,jdbcType=INTEGER},
+      </if>
+      <if test="tcAccount != null">
+        #{tcAccount,jdbcType=INTEGER},
+      </if>
+      <if test="fcAccount != null">
+        #{fcAccount,jdbcType=INTEGER},
+      </if>
+      <if test="msAccount != null">
+        #{msAccount,jdbcType=INTEGER},
+      </if>
+      <if test="ctAccount != null">
+        #{ctAccount,jdbcType=INTEGER},
+      </if>
+      <if test="fiAccount != null">
+        #{fiAccount,jdbcType=INTEGER},
+      </if>
+      <if test="ffAccount != null">
+        #{ffAccount,jdbcType=INTEGER},
+      </if>
+      <if test="clAccount != null">
+        #{clAccount,jdbcType=INTEGER},
+      </if>
+      <if test="idocrAccount != null">
+        #{idocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="blocrAccount != null">
+        #{blocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="bocrAccount != null">
+        #{bocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="docrAccount != null">
+        #{docrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrozen != null">
+        #{isFrozen,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+    update cre_user_account
+    <set>
+      <if test="creUserId != null">
+        cre_user_id = #{creUserId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=INTEGER},
+      </if>
+      <if test="apiAccount != null">
+        api_account = #{apiAccount,jdbcType=INTEGER},
+      </if>
+      <if test="rqAccount != null">
+        rq_account = #{rqAccount,jdbcType=INTEGER},
+      </if>
+      <if test="tcAccount != null">
+        tc_account = #{tcAccount,jdbcType=INTEGER},
+      </if>
+      <if test="fcAccount != null">
+        fc_account = #{fcAccount,jdbcType=INTEGER},
+      </if>
+      <if test="msAccount != null">
+        ms_account = #{msAccount,jdbcType=INTEGER},
+      </if>
+      <if test="ctAccount != null">
+        ct_account = #{ctAccount,jdbcType=INTEGER},
+      </if>
+      <if test="fiAccount != null">
+        fi_account = #{fiAccount,jdbcType=INTEGER},
+      </if>
+      <if test="ffAccount != null">
+        ff_account = #{ffAccount,jdbcType=INTEGER},
+      </if>
+      <if test="clAccount != null">
+        cl_account = #{clAccount,jdbcType=INTEGER},
+      </if>
+      <if test="idocrAccount != null">
+        idocr_account = #{idocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="blocrAccount != null">
+        blocr_account = #{blocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="bocrAccount != null">
+        bocr_account = #{bocrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="docrAccount != null">
+        docr_account = #{docrAccount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrozen != null">
+        is_frozen = #{isFrozen,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+    update cre_user_account
+    set cre_user_id = #{creUserId,jdbcType=INTEGER},
+      account = #{account,jdbcType=INTEGER},
+      api_account = #{apiAccount,jdbcType=INTEGER},
+      rq_account = #{rqAccount,jdbcType=INTEGER},
+      tc_account = #{tcAccount,jdbcType=INTEGER},
+      fc_account = #{fcAccount,jdbcType=INTEGER},
+      ms_account = #{msAccount,jdbcType=INTEGER},
+      ct_account = #{ctAccount,jdbcType=INTEGER},
+      fi_account = #{fiAccount,jdbcType=INTEGER},
+      ff_account = #{ffAccount,jdbcType=INTEGER},
+      cl_account = #{clAccount,jdbcType=INTEGER},
+      idocr_account = #{idocrAccount,jdbcType=INTEGER},
+      blocr_account = #{blocrAccount,jdbcType=INTEGER},
+      bocr_account = #{bocrAccount,jdbcType=INTEGER},
+      docr_account = #{docrAccount,jdbcType=INTEGER},
+      delete_status = #{deleteStatus,jdbcType=VARCHAR},
+      is_frozen = #{isFrozen,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="sumEmptyFileBalance" resultType="java.math.BigDecimal">
+    SELECT SUM(account) FROM cre_user_account
+    WHERE delete_status = '0'
+  </select>
+
+  <select id="selectByCreUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cre_user_account
+    where cre_user_id = #{cre_user_id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectNormalByCreUserId"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cre_user_account
+    where cre_user_id = #{cre_user_id,jdbcType=INTEGER} and delete_status = '0'
+  </select>
+
+  <update id="addNumber" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+      update cre_user_account
+      <set>
+          <if test="creUserId != null">
+              cre_user_id = #{creUserId,jdbcType=INTEGER},
+          </if>
+          <if test="account != null">
+              account =ifnull(account,0)+ #{account,jdbcType=INTEGER},
+          </if>
+          <if test="apiAccount != null">
+              api_account =ifnull(api_account,0)+ #{apiAccount,jdbcType=INTEGER},
+          </if>
+          <if test="rqAccount != null">
+              rq_account =ifnull(rq_account,0)+ #{rqAccount,jdbcType=INTEGER},
+          </if>
+          <if test="tcAccount != null">
+              tc_account = ifnull(tc_account,0)+#{tcAccount,jdbcType=INTEGER},
+          </if>
+          <if test="fcAccount != null">
+              fc_account =ifnull(fc_account,0)+ #{fcAccount,jdbcType=INTEGER},
+          </if>
+          <if test="msAccount != null">
+              ms_account = ifnull(ms_account,0)+#{msAccount,jdbcType=INTEGER},
+          </if>
+          <if test="ctAccount != null">
+              ct_account =ifnull(ct_account,0)+ #{ctAccount,jdbcType=INTEGER},
+          </if>
+          <if test="fiAccount != null">
+              fi_account =ifnull(fi_account,0)+ #{fiAccount,jdbcType=INTEGER},
+          </if>
+          <if test="ffAccount != null">
+              ff_account =ifnull(ff_account,0)+ #{ffAccount,jdbcType=INTEGER},
+          </if>
+          <if test="clAccount != null">
+              cl_account = ifnull(cl_account,0)+#{clAccount,jdbcType=INTEGER},
+          </if>
+          <if test="idocrAccount != null">
+              idocr_account =ifnull(idocr_account,0)+ #{idocrAccount,jdbcType=INTEGER},
+          </if>
+          <if test="blocrAccount != null">
+              blocr_account =ifnull(blocr_account,0)+ #{blocrAccount,jdbcType=INTEGER},
+          </if>
+          <if test="bocrAccount != null">
+              bocr_account =ifnull(bocr_account,0)+ #{bocrAccount,jdbcType=INTEGER},
+          </if>
+          <if test="docrAccount != null">
+              docr_account =ifnull(docr_account,0)+ #{docrAccount,jdbcType=INTEGER},
+          </if>
+          <if test="deleteStatus != null">
+              delete_status = #{deleteStatus,jdbcType=VARCHAR},
+          </if>
+          <if test="isFrozen != null">
+              is_frozen = #{isFrozen,jdbcType=INTEGER},
+          </if>
+          <if test="version != null">
+              version = #{version,jdbcType=INTEGER},
+          </if>
+          <if test="createTime != null">
+              create_time = #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+              update_time = #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<insert id="saveCreUserAccount" parameterType="com.credit.oem.admin.modules.agent.entity.CreUserAccount">
+		insert into cre_user_account
+		           (cre_user_id,account,delete_status,version,create_time,update_time)
+		values
+		           (#{creUserId},#{account},#{deleteStatus},#{version},#{createTime},#{updateTime})
+	</insert>
+	
+	<insert id="saveApiAccountInfo" parameterType="com.credit.oem.admin.modules.agent.entity.ApiAccountInfo">
+		insert into api_acount_info
+		           (cre_user_id,name,password,bd_ip,result_pwd,salt,delete_status,version,create_time,update_time)
+		values
+		           (#{creUserId},#{userName},#{password},#{bdIp},#{resultPwd},#{salt},#{flag},#{version},#{createTime},#{updateTime})
+	</insert>
+</mapper>

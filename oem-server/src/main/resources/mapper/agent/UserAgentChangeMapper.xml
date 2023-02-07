@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.UserAgentChangeMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.UserAgentChange">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="creUserId" jdbcType="INTEGER" property="creuserid"/>
+        <result column="cust_name" jdbcType="VARCHAR" property="custName"/>
+        <result column="out_agent_name" jdbcType="VARCHAR" property="outAgentName"/>
+        <result column="out_agent_id" jdbcType="BIGINT" property="outAgentId"/>
+        <result column="in_agent_name" jdbcType="VARCHAR" property="inAgentName"/>
+        <result column="in_agent_id" jdbcType="BIGINT" property="inAgentId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="register_time" jdbcType="TIMESTAMP" property="registerTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, mobile, creUserId, cust_name, out_agent_name, out_agent_id, in_agent_name, in_agent_id,
+    remark, create_time, register_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from o_user_agent_change
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_user_agent_change
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.UserAgentChange">
+    insert into o_user_agent_change (id, mobile, creUserId,
+    cust_name, out_agent_name, out_agent_id,
+    in_agent_name, in_agent_id, remark,
+    create_time, register_time)
+    values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{creuserid,jdbcType=INTEGER},
+    #{custName,jdbcType=VARCHAR}, #{outAgentName,jdbcType=VARCHAR}, #{outAgentId,jdbcType=BIGINT},
+    #{inAgentName,jdbcType=VARCHAR}, #{inAgentId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{registerTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.UserAgentChange">
+        insert into o_user_agent_change
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="creuserid != null">
+                creUserId,
+            </if>
+            <if test="custName != null">
+                cust_name,
+            </if>
+            <if test="outAgentName != null">
+                out_agent_name,
+            </if>
+            <if test="outAgentId != null">
+                out_agent_id,
+            </if>
+            <if test="inAgentName != null">
+                in_agent_name,
+            </if>
+            <if test="inAgentId != null">
+                in_agent_id,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="creuserid != null">
+                #{creuserid,jdbcType=INTEGER},
+            </if>
+            <if test="custName != null">
+                #{custName,jdbcType=VARCHAR},
+            </if>
+            <if test="outAgentName != null">
+                #{outAgentName,jdbcType=VARCHAR},
+            </if>
+            <if test="outAgentId != null">
+                #{outAgentId,jdbcType=BIGINT},
+            </if>
+            <if test="inAgentName != null">
+                #{inAgentName,jdbcType=VARCHAR},
+            </if>
+            <if test="inAgentId != null">
+                #{inAgentId,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.UserAgentChange">
+        update o_user_agent_change
+        <set>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="creuserid != null">
+                creUserId = #{creuserid,jdbcType=INTEGER},
+            </if>
+            <if test="custName != null">
+                cust_name = #{custName,jdbcType=VARCHAR},
+            </if>
+            <if test="outAgentName != null">
+                out_agent_name = #{outAgentName,jdbcType=VARCHAR},
+            </if>
+            <if test="outAgentId != null">
+                out_agent_id = #{outAgentId,jdbcType=BIGINT},
+            </if>
+            <if test="inAgentName != null">
+                in_agent_name = #{inAgentName,jdbcType=VARCHAR},
+            </if>
+            <if test="inAgentId != null">
+                in_agent_id = #{inAgentId,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.UserAgentChange">
+    update o_user_agent_change
+    set mobile = #{mobile,jdbcType=VARCHAR},
+    creUserId = #{creuserid,jdbcType=INTEGER},
+    cust_name = #{custName,jdbcType=VARCHAR},
+    out_agent_name = #{outAgentName,jdbcType=VARCHAR},
+    out_agent_id = #{outAgentId,jdbcType=BIGINT},
+    in_agent_name = #{inAgentName,jdbcType=VARCHAR},
+    in_agent_id = #{inAgentId,jdbcType=BIGINT},
+    remark = #{remark,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    register_time = #{registerTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <resultMap id="DataResultMap" type="com.credit.oem.admin.modules.agent.model.data.UserAgentChangeData">
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="cust_name" jdbcType="VARCHAR" property="custName"/>
+        <result column="out_agent_name" jdbcType="VARCHAR" property="outAgentName"/>
+        <result column="in_agent_name" jdbcType="VARCHAR" property="inAgentName"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="register_time" jdbcType="VARCHAR" property="registerTime"/>
+        <result column="creUserId" jdbcType="INTEGER" property="creUserId"/>
+    </resultMap>
+
+    <select id="selectListByParam" parameterType="com.credit.oem.admin.modules.agent.model.param.UserAgentChangeParam" resultMap="DataResultMap">
+        SELECT t1.mobile,t1.cust_name,t1.remark,
+        DATE_FORMAT(t1.register_time,"%Y-%m-%d %H:%i:%s") as register_time,
+        DATE_FORMAT(t1.create_time,"%Y-%m-%d %H:%i:%s") as create_time,
+        t2.company_name as in_agent_name ,t3.company_name AS out_agent_name,t1.creUserId
+        from o_user_agent_change t1 LEFT JOIN o_agent t2 on t1.in_agent_id=t2.id
+        LEFT JOIN o_agent t3 on t1.out_agent_id=t3.id
+        where 1=1
+        <if test="startTime != null and startTime !=''">
+            and t1.create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and t1.create_time &lt;= #{endTime}
+        </if>
+        <if test="mobile != null and mobile !=''">
+            and t1.mobile like #{mobile}
+        </if>
+        <if test="outAgentName != null and outAgentName  !=''">
+            and t3.company_name like #{outAgentName}
+        </if>
+        <if test="inAgentName != null and inAgentName !=''">
+            and t2.company_name like #{inAgentName}
+        </if>
+        order by t1.create_time desc
+    </select>
+
+
+</mapper>

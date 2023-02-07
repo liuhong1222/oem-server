@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.TrdOrderMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cre_user_id" jdbcType="INTEGER" property="creUserId"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="trade_no" jdbcType="VARCHAR" property="tradeNo"/>
+        <result column="cl_order_no" jdbcType="VARCHAR" property="clOrderNo"/>
+        <result column="products_id" jdbcType="INTEGER" property="productsId"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="free_number" jdbcType="INTEGER" property="freeNumber"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="pay_type" jdbcType="VARCHAR" property="payType"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="delete_status" jdbcType="VARCHAR" property="deleteStatus"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cre_user_id, order_no, trade_no, cl_order_no, products_id, number,free_number, money, pay_type, 
+    pay_time, type, status, delete_status, version, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from trd_order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from trd_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+    insert into trd_order (id, cre_user_id, order_no, 
+      trade_no, cl_order_no, products_id, 
+      number,free_number, money, pay_type, 
+      pay_time, type, status, 
+      delete_status, version, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{creUserId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{clOrderNo,jdbcType=VARCHAR}, #{productsId,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER},#{freeNumber,jdbcType=INTEGER},  #{money,jdbcType=DECIMAL}, #{payType,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{deleteStatus,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+        insert into trd_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="creUserId != null">
+                cre_user_id,
+            </if>
+            createDate,
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="tradeNo != null">
+                trade_no,
+            </if>
+            <if test="clOrderNo != null">
+                cl_order_no,
+            </if>
+            <if test="productsId != null">
+                products_id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="freeNumber != null">
+                free_number,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="deleteStatus != null">
+                delete_status,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="creUserId != null">
+                #{creUserId,jdbcType=INTEGER},
+            </if>
+            CURDATE(),
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="clOrderNo != null">
+                #{clOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productsId != null">
+                #{productsId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="freeNumber != null">
+                #{freeNumber,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+        update trd_order
+        <set>
+            <if test="creUserId != null">
+                cre_user_id = #{creUserId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeNo != null">
+                trade_no = #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="clOrderNo != null">
+                cl_order_no = #{clOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productsId != null">
+                products_id = #{productsId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteStatus != null">
+                delete_status = #{deleteStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+    update trd_order
+    set cre_user_id = #{creUserId,jdbcType=INTEGER},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      cl_order_no = #{clOrderNo,jdbcType=VARCHAR},
+      products_id = #{productsId,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="sumMoney" resultType="java.math.BigDecimal">
+    SELECT SUM(money) FROM trd_order
+    WHERE create_time &gt;= #{beginTime} AND create_time &lt;= #{endTime}
+    AND delete_status = '0' AND STATUS = '1'
+  </select>
+
+    <select id="selectRechargeList" parameterType="com.credit.oem.admin.modules.agent.model.param.RechargeDetailParam"
+            resultType="java.util.Map">
+        SELECT t4.id as userId,t1.id as orderId,t4.user_phone, t3.product_name,t2.package_name,t1.money/t1.number as
+        price,t1.money,t1.number,
+        (case t1.pay_type
+        WHEN '1' then "支付宝"
+        WHEN '2' then "银联"
+        WHEN '3' then "创蓝充值"
+        WHEN '4' then "管理员充值"
+        END) as pay_type
+        ,t1.create_time,t1.type
+        from trd_order t1 LEFT JOIN t_product_package t2
+        on t1.products_id=t2.id
+        LEFT JOIN t_product t3 on t2.product_id=t3.id
+        left JOIN cre_user t4 on t1.cre_user_id=t4.id
+        where 1=1
+        and t1.`status`='1'
+        and t1.delete_status='0'
+        <if test="mobile!=null and mobile!=''">
+            and t4.user_phone like #{mobile}
+        </if>
+        <if test="type!=null and type!=''">
+            and t1.type=#{type}
+        </if>
+        <if test="userId!=null">
+            and t1.cre_user_id=#{userId}
+        </if>
+        <if test="productId!=null">
+            and t3.id=#{productId}
+        </if>
+        <if test="payType!=null and  payType!=''">
+            and t1.pay_type=#{payType}
+        </if>
+        <if test="startDateStr!=null and  startDateStr!=''" >
+            and t1.create_time>=#{startDateStr}
+        </if>
+        <if test="endDateStr!=null  and  endDateStr!=''">
+            and t1.create_time &lt;=#{endDateStr}
+        </if>
+        <choose>
+            <when test='projectType !=null and projectType==1 '>
+                <if test="minCount!=null">
+                    and t1.money/t1.number>=#{minCount}
+                </if>
+                <if test="maxCount!=null">
+                    and t1.money/t1.number &lt;=#{maxCount}
+                </if>
+            </when>
+            <when test='projectType !=null and projectType==2 '>
+                <if test="minCount!=null">
+                    and t1.number>=#{minCount}
+                </if>
+                <if test="maxCount!=null">
+                    and t1.number &lt;=#{maxCount}
+                </if>
+            </when>
+            <when test='projectType !=null and projectType==3 '>
+                <if test="minCount!=null">
+                    and t1.money>=#{minCount}
+                </if>
+                <if test="maxCount!=null">
+                    and t1.money &lt;=#{maxCount}
+                </if>
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        order by t1.create_time desc
+    </select>
+
+    <select id="getPackageInfo" parameterType="long" resultType="java.util.Map">
+        select t3.*
+        from o_agent_cre_user t1, o_agent t2,o_agent_package t3
+        where t1.agent_id=t2.id and t3.agent_id=t2.id
+        and t1.cre_user_id=#{creUserId}
+        and t3.product_id=1
+    </select>
+
+    <select id="getAgentAmountByCreUserId" parameterType="long" resultType="java.util.Map">
+        select t4.*
+        from o_agent_cre_user t1, o_agent t2,o_agent_account t4
+        where t1.agent_id=t2.id  and t2.id=t4.agent_id
+        and t1.cre_user_id=#{creUserId}
+    </select>
+
+    <select id="queryUserRechargeList" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceUserRechargeData">
+        select trod.id as orderId,trod.pay_time as payTime,trod.cre_user_id as userId,
+        agod.cre_user_name as userName,
+        agod.cre_user_phone as userMobile,
+        agod.agent_id as agentId,agod.agent_company_name as agentCompanyName,
+        trod.order_no as orderNo,agod.trd_order_package_name as packageName,
+        agod.trd_order_price as price,
+        trod.number,trod.money,trod.pay_type as payType,
+        agod.remark as  remark
+        from trd_order as trod
+        inner join o_agent_trd_order_id as agod on trod.id=agod.trd_order_id
+        where trod.status='1' and trod.delete_status='0' and trod.type='1' and agod.trd_order_product_id=1
+        and agod.updated &gt; 0
+
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and agod.agent_id= #{agentId}
+        </if>
+
+        <if test="userName != null and userName !=''">
+            and agod.cre_user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="companyName != null and companyName !=''">
+            and agod.agent_company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="userMobile != null and userMobile !=''">
+            and agod.cre_user_phone like concat('%',#{userMobile},'%')
+        </if>
+        <if test="agentMobile != null and agentMobile !=''">
+            and agod.agent_mobile like concat('%',#{agentMobile},'%')
+        </if>
+        order by trod.id desc
+    </select>
+
+    <select id="queryUserRechargeListExcludeGiftAmount" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceUserRechargeData">
+        select trod.id as orderId,trod.pay_time as payTime,trod.cre_user_id as userId,
+				        eu.userName as userName,
+				c.user_phone as userMobile,
+				o.id as agentId,o.company_name as agentCompanyName,
+				trod.order_no as orderNo,oap.package_name as packageName,
+				round(trod.money/trod.number,4) as price,
+				trod.number,trod.free_number freeNumber,trod.money,trod.pay_type as payType,
+				trod.status,oa.remark as  remark
+		from trd_order as trod
+        INNER JOIN cre_user c on c.id = trod.cre_user_id and c.delete_status = '0'
+        <if test="userMobile != null and userMobile !=''">
+            and c.user_phone = #{userMobile}
+        </if>
+		LEFT join erp_user_info e on e.creUserId = trod.cre_user_id
+		LEFT JOIN erp_user eu on eu.userId = e.companyName 
+		LEFT join o_agent_cre_user oac on oac.cre_user_id = c.id
+		left join o_agent_order oa on oa.order_no = trod.order_no
+		LEFT join o_agent o on o.id = oac.agent_id
+		LEFT join o_agent_package oap on oap.agent_id = o.id and oap.package_id = trod.products_id
+        where trod.status !='0' and trod.delete_status='0' and trod.type='1'
+        and trod.products_id in (1,2,3,4)  and trod.pay_type  not in (9,10)
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="payStatus != null and payStatus !=''">
+            and trod.status= #{payStatus}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and oac.agent_id= #{agentId}
+        </if>
+        <if test="userName != null and userName !=''">
+            and eu.userName like concat('%',#{userName},'%')
+        </if>             
+        <if test="agentMobile != null and agentMobile !=''">
+            and o.mobile like concat('%',#{agentMobile},'%')
+        </if>
+        order by trod.id desc
+    </select>
+	
+	<select id="queryUserRechargeCheckList" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceUserRechargeCheckData">
+        select trod.id as orderId,trod.create_time as createTime,trod.cre_user_id as userId,
+               c.user_phone userPhone,o.company_name as agentCompanyName,
+        	   trod.money,agod.remark,trod.status
+        from trd_order as trod
+        inner join cre_user c on c.id = trod.cre_user_id and c.delete_status = '0'
+        <if test="userMobile != null and userMobile !=''">
+            and c.user_phone = #{userMobile}
+        </if>
+        INNER JOIN o_agent_cre_user oacu on oacu.cre_user_id = c.id
+		INNER JOIN o_agent o on o.id = oacu.agent_id 
+		<if test="companyName != null and companyName !=''">
+            and o.company_name like concat('%',#{companyName},'%')
+        </if>
+        left join o_agent_trd_order_id as agod on trod.id=agod.trd_order_id
+        where trod.status ='3' and trod.delete_status='0' and trod.type='1'
+        and trod.products_id in (1,2,3,4)
+        and trod.pay_type  not in (9,10)        
+        order by trod.create_time desc
+    </select>
+	
+    <select id="queryUserRechargeTotalInfo" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceTotalInfoData">
+        select sum(trod.number) as number,sum(trod.money) as money
+        from trd_order as trod
+        inner join o_agent_trd_order_id as agod on trod.id=agod.trd_order_id
+        where trod.status='1' and trod.delete_status='0' and trod.type='1' and agod.trd_order_product_id=1
+        and agod.updated &gt; 0
+
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and agod.agent_id= #{agentId}
+        </if>
+
+        <if test="userName != null and userName !=''">
+            and agod.cre_user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="companyName != null and companyName !=''">
+            and agod.agent_company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="userMobile != null and userMobile !=''">
+            and agod.cre_user_phone like concat('%',#{userMobile},'%')
+        </if>
+        <if test="agentMobile != null and agentMobile !=''">
+            and agod.agent_mobile like concat('%',#{agentMobile},'%')
+        </if>
+    </select>
+
+    <select id="queryUserRechargeTotalInfoExcludeGiftAmount" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceTotalInfoData">
+        select sum(trod.number) as number,sum(trod.money) as money
+        from trd_order as trod
+        INNER JOIN cre_user c on c.id = trod.cre_user_id and c.delete_status = '0'
+        <if test="userMobile != null and userMobile !=''">
+            and c.user_phone = #{userMobile}
+        </if>
+		LEFT join erp_user_info e on e.creUserId = trod.cre_user_id
+		LEFT JOIN erp_user eu on eu.userId = e.companyName
+		LEFT join o_agent_cre_user oac on oac.cre_user_id = c.id
+		left join o_agent_order oa on oa.order_no = trod.order_no
+		LEFT join o_agent o on o.id = oac.agent_id
+		LEFT join o_agent_package oap on oap.agent_id = o.id and oap.package_id = trod.products_id
+        where trod.status !='0' and trod.delete_status='0' and trod.type='1'
+        and trod.products_id in (1,2,3,4)  and trod.pay_type  not in (9,10)
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="payStatus != null and payStatus !=''">
+            and trod.status= #{payStatus}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and oac.agent_id= #{agentId}
+        </if>
+
+        <if test="userName != null and userName !=''">
+            and eu.userName like concat('%',#{userName},'%')
+        </if>       
+        <if test="agentMobile != null and agentMobile !=''">
+            and o.mobile like concat('%',#{agentMobile},'%')
+        </if>
+    </select>
+
+    <select id="queryUserRefundList" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceUserRefundData">
+        select trod.id as orderId,trod.pay_time as payTime,trod.cre_user_id as userId,
+        agod.cre_user_name as userName,
+        agod.cre_user_phone as userMobile,
+        agod.agent_id as agentId,agod.agent_company_name as agentCompanyName,
+        trod.order_no as orderNo,agod.trd_order_package_name as packageName,
+        agod.trd_order_price as price,
+        trod.number,trod.money,trod.pay_type as payType,
+        agod.remark as  remark
+        from trd_order as trod
+        left join o_agent_trd_order_id as agod on trod.id=agod.trd_order_id
+        where trod.status='1' and trod.delete_status='0' and trod.type='2' and trod.products_id in (1,2,3,4)
+        and trod.pay_type not in (9,10)
+        and agod.updated &gt; 0
+
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and agod.agent_id= #{agentId}
+        </if>
+
+        <if test="userName != null and userName !=''">
+            and agod.cre_user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="companyName != null and companyName !=''">
+            and agod.agent_company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="userMobile != null and userMobile !=''">
+            and agod.cre_user_phone like concat('%',#{userMobile},'%')
+        </if>
+        <if test="agentMobile != null and agentMobile !=''">
+            and agod.agent_mobile like concat('%',#{agentMobile},'%')
+        </if>
+        order by trod.id desc
+    </select>
+
+    <select id="queryUserRefundTotalInfo" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceTotalInfoData">
+        select sum(trod.number) as number,sum(trod.money) as money
+        from trd_order as trod
+        left join o_agent_trd_order_id as agod on trod.id=agod.trd_order_id
+        where trod.status='1' and trod.delete_status='0' and trod.type='2'
+        and trod.products_id in (1,2,3,4)
+        and trod.pay_type not in (9,10)
+        and agod.updated &gt; 0
+
+        <if test="payType != null and payType !=''">
+            and trod.pay_type= #{payType}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            and trod.pay_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and trod.pay_time &lt;= #{endTime}
+        </if>
+        <if test="agentId != null and agentId !=''">
+            and agod.agent_id= #{agentId}
+        </if>
+
+        <if test="userName != null and userName !=''">
+            and agod.cre_user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="companyName != null and companyName !=''">
+            and agod.agent_company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="userMobile != null and userMobile !=''">
+            and agod.cre_user_phone like concat('%',#{userMobile},'%')
+        </if>
+        <if test="agentMobile != null and agentMobile !=''">
+            and agod.agent_mobile like concat('%',#{agentMobile},'%')
+        </if>
+    </select>
+
+    <select id="getRechargeAmountSumByAgentId" parameterType="java.lang.Long"
+            resultType="java.math.BigDecimal">
+        SELECT
+        sum(
+        CASE t1.type
+        WHEN "1" THEN
+        t1.money
+        WHEN "2" THEN
+        t1.money * - 1
+        ELSE
+        t1.money
+        END
+        ) AS total
+        FROM
+        trd_order t1
+        LEFT JOIN o_agent_trd_order_id t2 on t1.id=t2.trd_order_id
+        WHERE
+        t2.id IS NOT NULL
+        and t1.id IS NOT NULL
+        AND t1.`status` = 1
+        AND t1.delete_status = 0
+        AND t2.agent_id = #{agentId}
+        and t1.pay_type not in (9,10)
+        and t1.products_id in (1,2,3,4)
+        and t2.updated &gt; 0
+    </select>
+
+    <select id="getRechargeNumberSumByAgentId" parameterType="java.lang.Long"
+            resultType="java.lang.Long">
+        SELECT
+        sum(
+        CASE t1.type
+        WHEN "1" THEN
+        t1.number
+        WHEN "2" THEN
+        t1.number * - 1
+        ELSE
+        t1.number
+        END
+        ) AS total
+        FROM
+        trd_order t1
+        LEFT JOIN o_agent_trd_order_id t2 on t1.id=t2.trd_order_id
+        WHERE
+        t2.id IS NOT NULL
+        and t1.id IS NOT NULL
+        AND t1.`status` = 1
+        AND t1.delete_status = 0
+        AND t2.agent_id = #{agentId}
+        and t1.pay_type not in (9,10)
+        and t1.products_id in (1,2,3,4)
+        and t2.updated &gt; 0
+    </select>
+
+    <select id="queryOneWithValidPayTimeById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from trd_order
+        where id = #{id,jdbcType=INTEGER} and pay_time &lt;&gt; '0000-00-00 00:00:00' and pay_time is not null
+    </select>
+
+    <select id="getGiveAmountSumByCreUserId" parameterType="java.lang.Long"
+            resultType="java.lang.Long">
+        select sum(t.number)
+        from trd_order t
+        where
+        t.cre_user_id=#{creUserId}
+        and
+        t.status=1
+        and t.delete_status=0
+        and (t.pay_type=9 or t.pay_type=10)
+    </select>
+
+    <select id="selectSyncTrdOrderList"  resultMap="BaseResultMap">
+        SELECT t1.*
+        from trd_order t1 LEFT JOIN o_agent_trd_order_id t2
+        on t1.id=t2.trd_order_id
+        where t2.id is null
+        and t1.pay_time is not null
+        limit 2000
+    </select>
+
+	<select id="getRechargeInfoData" parameterType="string" resultType="com.credit.oem.admin.modules.agent.model.data.RechargeInfoData">
+		SELECT t.id  orderId,c.user_phone mobile,t.money,
+		       round(t.money/t.number,5) price,
+		       t.number,ifnull(t.free_number ,0) freeNumber,o.remark
+		from trd_order t 
+		INNER JOIN cre_user c on c.id = t.cre_user_id and c.delete_status = '0'
+		LEFT JOIN o_agent_trd_order_id o on o.trd_order_id = t.id 
+		where t.id = #{orderId} and t.delete_status = '0'
+		and t.`status` = '3' 
+		limit 0,1
+	</select>
+	
+	<insert id="saveTrdOrder" keyProperty="id" useGeneratedKeys="true" parameterType="com.credit.oem.admin.modules.agent.entity.TrdOrder">
+		INSERT INTO trd_order(
+		CRE_USER_ID,
+		createDate,
+		ORDER_NO,
+		TRADE_NO,
+		CL_ORDER_NO,
+		PRODUCTS_ID,
+		NUMBER,
+		MONEY,
+		PAY_TYPE,
+		PAY_TIME,
+		TYPE,
+		STATUS,
+		DELETE_STATUS,
+		VERSION,
+		createBy,
+		CREATE_TIME,
+		UPDATE_TIME)
+		VALUES (
+		#{creUserId},
+		CURDATE(),
+		#{orderNo},
+		#{tradeNo},
+		#{clOrderNo},
+		#{productsId},
+		#{number},
+		#{money},
+		#{payType},
+		#{payTime},
+		#{type},
+		#{status},
+		'0',
+		0,
+		8,
+		#{createTime},
+		#{updateTime}
+		)
+	</insert>
+</mapper>

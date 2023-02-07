@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AuthInfoMapper">
+
+
+    <select id="selectListByAllCustParam" parameterType="com.credit.oem.admin.modules.agent.model.param.CustInfoParam"
+            resultType="java.util.Map">
+        select *
+        from (
+        ( SELECT
+        t1.id as creUserId,
+        t1.user_phone,
+        t2.username as custName,
+        t4.company_name,
+        t1.create_time,
+        t5.account,
+        t1.user_type,
+        t2.id,
+        t4.id as agentId
+        FROM
+        o_agent_cre_user t3
+        LEFT JOIN o_agent t4 ON t3.agent_id = t4.id
+        LEFT JOIN cre_user t1 ON t3.cre_user_id = t1.id
+        LEFT JOIN idcardinfo t2 ON t2.cre_user_id = t1.id
+        LEFT JOIN cre_user_account t5 ON t5.cre_user_id = t1.id
+        <if test="adminType!=null and adminType==2">
+            LEFT JOIN o_agent_sys_user t6 on t6.agent_id=t4.id
+            LEFT JOIN o_sys_user t7 on t7.user_id=t6.sys_user_id
+        </if>
+        WHERE
+        t4.id is not null
+        <if test="adminType!=null and adminType==2">
+            and t7.user_id=#{sysUserId}
+        </if>
+        and ( t1.user_type = 0 or t1.user_type is null )
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; #{endTimeStr}
+        </if>
+        <if test="agentName!=null and agentName!=''">
+            and t4.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="custName!=null and custName!=''">
+            and t2.username like concat('%',#{custName},'%')
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+        )
+        union all
+        (
+        SELECT
+        t1.id as creUserId,
+        t1.user_phone,
+        t2.name as custName,
+        t4.company_name,
+        t1.create_time,
+        t5.account,
+        t1.user_type,
+        t2.id,
+        t4.id as agentId
+        FROM
+        o_agent_cre_user t3
+        LEFT JOIN o_agent t4 ON t3.agent_id = t4.id
+        LEFT JOIN cre_user t1 ON t3.cre_user_id = t1.id
+        LEFT JOIN businesslicenceinfo t2 ON t2.cre_user_id = t1.id
+        LEFT JOIN cre_user_account t5 ON t5.cre_user_id = t1.id
+        <if test="adminType!=null and adminType==2">
+            LEFT JOIN o_agent_sys_user t6 on t6.agent_id=t4.id
+            LEFT JOIN o_sys_user t7 on t7.user_id=t6.sys_user_id
+        </if>
+        WHERE
+        t4.id is not null
+        <if test="adminType!=null and adminType==2">
+            and t7.user_id=#{sysUserId}
+        </if>
+        and t1.user_type = 1
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; #{endTimeStr}
+        </if>
+        <if test="agentName!=null and agentName!=''">
+            and t4.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="custName!=null and custName!=''">
+            and t2.name like concat('%',#{custName},'%')
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+        )
+        ) tt
+        ORDER BY tt.create_time desc
+
+    </select>
+
+    <select id="selectListByComponyCustInfoParam"
+            parameterType="com.credit.oem.admin.modules.agent.model.param.CustInfoParam"
+            resultType="java.util.Map">
+        SELECT
+        t1.id as creUserId,
+        t1.user_phone,
+        t2.name as custName,
+        t4.company_name,
+        t1.create_time,
+        t5.account,
+        t1.user_type,
+        t2.id,
+        t4.id as agentId
+        FROM
+        o_agent_cre_user t3
+        LEFT JOIN o_agent t4 ON t3.agent_id = t4.id
+        LEFT JOIN cre_user t1 ON t3.cre_user_id = t1.id
+        LEFT JOIN businesslicenceinfo t2 ON t2.cre_user_id = t1.id
+        LEFT JOIN cre_user_account t5 ON t5.cre_user_id = t1.id
+        <if test="adminType!=null and adminType==2">
+            LEFT JOIN o_agent_sys_user t6 on t6.agent_id=t4.id
+            LEFT JOIN o_sys_user t7 on t7.user_id=t6.sys_user_id
+        </if>
+        WHERE
+        t4.id is not null
+        <if test="adminType!=null and adminType==2">
+            and t7.user_id=#{sysUserId}
+        </if>
+        and t1.user_type = 1
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; #{endTimeStr}
+        </if>
+        <if test="agentName!=null and agentName!=''">
+            and t4.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="custName!=null and custName!=''">
+            and t2.name like concat('%',#{custName},'%')
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+        order by t1.create_time desc
+    </select>
+
+
+    <select id="selectListByPersonCustInfoParam"
+            parameterType="com.credit.oem.admin.modules.agent.model.param.CustInfoParam"
+            resultType="java.util.Map">
+        SELECT
+        t1.id as creUserId,
+        t1.user_phone,
+        t2.username as custName,
+        t4.company_name,
+        t1.create_time,
+        t5.account,
+        t1.user_type,
+        t2.id,
+        t4.id as agentId
+        FROM
+        o_agent_cre_user t3
+        LEFT JOIN o_agent t4 ON t3.agent_id = t4.id
+        LEFT JOIN cre_user t1 ON t3.cre_user_id = t1.id
+        LEFT JOIN idcardinfo t2 ON t2.cre_user_id = t1.id
+        LEFT JOIN cre_user_account t5 ON t5.cre_user_id = t1.id
+        <if test="adminType!=null and adminType==2">
+            LEFT JOIN o_agent_sys_user t6 on t6.agent_id=t4.id
+            LEFT JOIN o_sys_user t7 on t7.user_id=t6.sys_user_id
+        </if>
+        WHERE
+        t4.id is not null
+        <if test="adminType!=null and adminType==2">
+            and t7.user_id=#{sysUserId}
+        </if>
+        and t1.user_type = 0
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; #{endTimeStr}
+        </if>
+        <if test="agentName!=null and agentName!=''">
+            and t4.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="custName!=null and custName!=''">
+            and t2.username like concat('%',#{custName},'%')
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+        order by t1.create_time desc
+
+    </select>
+
+    <select id="selectListByOtherCustParam" parameterType="com.credit.oem.admin.modules.agent.model.param.CustInfoParam"
+            resultType="java.util.Map">
+        SELECT
+        t1.id as creUserId,
+        t1.user_phone,
+        t2.username as custName,
+        t4.company_name,
+        t1.create_time,
+        t5.account,
+        t1.user_type,
+        t2.id,
+        t4.id as agentId
+        FROM
+        o_agent_cre_user t3
+        LEFT JOIN o_agent t4 ON t3.agent_id = t4.id
+        LEFT JOIN cre_user t1 ON t3.cre_user_id = t1.id
+        LEFT JOIN idcardinfo t2 ON t2.cre_user_id = t1.id
+        LEFT JOIN cre_user_account t5 ON t5.cre_user_id = t1.id
+        <if test="adminType!=null and adminType==2">
+            LEFT JOIN o_agent_sys_user t6 on t6.agent_id=t4.id
+            LEFT JOIN o_sys_user t7 on t7.user_id=t6.sys_user_id
+        </if>
+        WHERE
+        t4.id is not null
+        <if test="adminType!=null and adminType==2">
+            and t7.user_id=#{sysUserId}
+        </if>
+        and t1.user_type is null
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; #{endTimeStr}
+        </if>
+        <if test="agentName!=null and agentName!=''">
+            and t4.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="custName!=null and custName!=''">
+            and t2.username like concat('%',#{custName},'%')
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+        order by t1.create_time desc
+    </select>
+	
+	<select id="selectListCustParam" parameterType="com.credit.oem.admin.modules.agent.model.param.CustInfoParam"
+            resultType="java.util.Map">        
+		SELECT  t1.id AS creUserId,
+		        t1.user_phone,
+		        eu.userName custName,
+						CASE WHEN  t1.user_type = 1 THEN '企业'
+		             WHEN t1.user_type = 0 THEN '个人' ELSE "" END userType,
+		        t1.create_time,
+		        t1.user_type,
+		        t3.agent_id AS agentId,
+				o.company_name
+		FROM o_agent o
+		INNER JOIN o_agent_cre_user t3 on t3.agent_id = o.id 
+		<if test="agentId!=null and agentId !=''">
+            and t3.agent_id=#{agentId}
+        </if>
+		LEFT join erp_user_info e on e.creUserId = t3.cre_user_id
+		LEFT JOIN erp_user eu on eu.userId = e.companyName
+		INNER JOIN cre_user t1 ON t3.cre_user_id = t1.id 
+        <choose>
+            <when test='custType!=null and custType=="0"'>
+                and t1.user_type = 0
+            </when>
+            <when test='custType!=null and custType=="1"'>
+                and t1.user_type = 1
+            </when>
+            <when test='custType!=null and custType=="2"'>
+                and t1.user_type is null
+            </when>
+        </choose>
+        <if test="startTimeStr!=null and startTimeStr!=''">
+            and t1.create_time >= #{startTimeStr}
+        </if>
+        <if test="endTimeStr!=null and endTimeStr!=''">
+            and t1.create_time &lt; DATE_ADD(#{endTimeStr},INTERVAL 1 day)
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and t1.user_phone like concat('%',#{mobile},'%')
+        </if>
+		WHERE o.`status` = 1 and o.delete_flag = 1    
+		<if test="agentName!=null and agentName!=''">
+            and o.company_name like concat('%',#{agentName},'%')
+        </if>    
+        <if test="custName!=null and custName!=''">
+            and eu.userName like concat('%',#{custName},'%')
+        </if>
+        order by t1.create_time desc
+    </select>
+
+</mapper>

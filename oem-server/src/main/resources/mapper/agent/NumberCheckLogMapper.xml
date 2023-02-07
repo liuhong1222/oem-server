@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.NumberCheckLogMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.NumberCheckLog">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="consumptionNum" jdbcType="VARCHAR" property="consumptionnum" />
+        <result column="userId" jdbcType="INTEGER" property="userid" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="count" jdbcType="INTEGER" property="count" />
+        <result column="menu" jdbcType="VARCHAR" property="menu" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="dayInt" jdbcType="INTEGER" property="dayint" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+        <result column="source" jdbcType="VARCHAR" property="source" />
+        <result column="cre_user_name" jdbcType="VARCHAR" property="creUserName" />
+        <result column="cre_user_phone" jdbcType="VARCHAR" property="creUserPhone" />
+        <result column="cre_user_type" jdbcType="TINYINT" property="creUserType" />
+        <result column="agent_id" jdbcType="BIGINT" property="agentId" />
+        <result column="agent_company_name" jdbcType="VARCHAR" property="agentCompanyName" />
+        <result column="agent_mobile" jdbcType="VARCHAR" property="agentMobile" />
+        <result column="updated" jdbcType="TINYINT" property="updated" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, consumptionNum, userId, type, count, menu, status, dayInt, createTime, updateTime,
+    source, cre_user_name, cre_user_phone, cre_user_type, agent_id, agent_company_name,
+    agent_mobile, updated
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from number_check_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from number_check_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.NumberCheckLog">
+    insert into number_check_log (id, consumptionNum, userId,
+      type, count, menu,
+      status, dayInt, createTime,
+      updateTime, source, cre_user_name,
+      cre_user_phone, cre_user_type, agent_id,
+      agent_company_name, agent_mobile, updated
+      )
+    values (#{id,jdbcType=VARCHAR}, #{consumptionnum,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER},
+      #{type,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{menu,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{dayint,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},
+      #{updatetime,jdbcType=TIMESTAMP}, #{source,jdbcType=VARCHAR}, #{creUserName,jdbcType=VARCHAR},
+      #{creUserPhone,jdbcType=VARCHAR}, #{creUserType,jdbcType=TINYINT}, #{agentId,jdbcType=BIGINT},
+      #{agentCompanyName,jdbcType=VARCHAR}, #{agentMobile,jdbcType=VARCHAR}, #{updated,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.NumberCheckLog">
+        insert into number_check_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="consumptionnum != null">
+                consumptionNum,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="menu != null">
+                menu,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="dayint != null">
+                dayInt,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="creUserName != null">
+                cre_user_name,
+            </if>
+            <if test="creUserPhone != null">
+                cre_user_phone,
+            </if>
+            <if test="creUserType != null">
+                cre_user_type,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+            <if test="agentCompanyName != null">
+                agent_company_name,
+            </if>
+            <if test="agentMobile != null">
+                agent_mobile,
+            </if>
+            <if test="updated != null">
+                updated,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="consumptionnum != null">
+                #{consumptionnum,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="menu != null">
+                #{menu,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dayint != null">
+                #{dayint,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserName != null">
+                #{creUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserPhone != null">
+                #{creUserPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserType != null">
+                #{creUserType,jdbcType=TINYINT},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="agentCompanyName != null">
+                #{agentCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile != null">
+                #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="updated != null">
+                #{updated,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.NumberCheckLog">
+        update number_check_log
+        <set>
+            <if test="consumptionnum != null">
+                consumptionNum = #{consumptionnum,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                userId = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="menu != null">
+                menu = #{menu,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dayint != null">
+                dayInt = #{dayint,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                updateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserName != null">
+                cre_user_name = #{creUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserPhone != null">
+                cre_user_phone = #{creUserPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="creUserType != null">
+                cre_user_type = #{creUserType,jdbcType=TINYINT},
+            </if>
+            <if test="agentId != null">
+                agent_id = #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="agentCompanyName != null">
+                agent_company_name = #{agentCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile != null">
+                agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="updated != null">
+                updated = #{updated,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.NumberCheckLog">
+    update number_check_log
+    set consumptionNum = #{consumptionnum,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      menu = #{menu,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      dayInt = #{dayint,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      source = #{source,jdbcType=VARCHAR},
+      cre_user_name = #{creUserName,jdbcType=VARCHAR},
+      cre_user_phone = #{creUserPhone,jdbcType=VARCHAR},
+      cre_user_type = #{creUserType,jdbcType=TINYINT},
+      agent_id = #{agentId,jdbcType=BIGINT},
+      agent_company_name = #{agentCompanyName,jdbcType=VARCHAR},
+      agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="queryListByNotUpdated" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from number_check_log
+        where updated = 0 and agent_id is not null
+    </select>
+
+
+    <select id="queryUserConsumeList" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceUserConsumeData">
+        select n.id as orderNo,n.createTime as consumeTime,n.userId as userId,
+					eu.userName as userName,
+					c.user_phone as userMobile,
+					oacu.agent_id as agentId,
+					oa.company_name as agentCompanyName,n.fileName,
+		      n.realCount,n.emptyCount,n.silentCount,n.riskCount,
+					n.count as number
+		from number_check_log n
+		INNER JOIN cre_user c on c.id = n.userId and c.delete_status = '0'
+		<if test="userMobile != null and userMobile !=''">
+            and c.user_phone =#{userMobile}
+        </if>
+		LEFT join erp_user_info e on e.creUserId = n.userId
+		LEFT JOIN erp_user eu on eu.userId = e.companyName
+		INNER JOIN o_agent_cre_user oacu on oacu.cre_user_id = c.id 
+		 <if test="agentId != null and agentId !=''">
+            and oacu.agent_id= #{agentId}
+        </if>
+		INNER JOIN o_agent oa on oa.id = oacu.agent_id
+		<if test="companyName != null and companyName !=''">
+            and oa.company_name like concat('%',#{companyName},'%')
+        </if>
+         <if test="agentMobile != null and agentMobile !=''">
+            and oa.mobile like concat('%',#{agentMobile},'%')
+        </if>
+        where n.status=1
+        <if test="startTime != null and startTime !=''">
+            and n.dayInt &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and n.dayInt &lt;= #{endTime}
+        </if>
+        <if test="userName != null and userName !=''">
+            and eu.userName like concat('%',#{userName},'%')
+        </if>       
+        order by n.createTime desc
+    </select>
+
+
+    <select id="queryUserConsumeTotalInfo" parameterType="com.credit.oem.admin.modules.agent.model.param.FinanceRechargeParam"  resultType="com.credit.oem.admin.modules.agent.model.data.FinanceTotalInfoData">
+        select sum(`count`) as number
+        from number_check_log n
+		INNER JOIN cre_user c on c.id = n.userId and c.delete_status = '0'
+		<if test="userMobile != null and userMobile !=''">
+            and c.user_phone =#{userMobile}
+        </if>
+		LEFT join erp_user_info e on e.creUserId = n.userId
+		LEFT JOIN erp_user eu on eu.userId = e.companyName
+		INNER JOIN o_agent_cre_user oacu on oacu.cre_user_id = c.id 
+		 <if test="agentId != null and agentId !=''">
+            and oacu.agent_id= #{agentId}
+        </if>
+		INNER JOIN o_agent oa on oa.id = oacu.agent_id
+		<if test="companyName != null and companyName !=''">
+            and oa.company_name like concat('%',#{companyName},'%')
+        </if>
+         <if test="agentMobile != null and agentMobile !=''">
+            and oa.mobile like concat('%',#{agentMobile},'%')
+        </if>
+        where n.status=1
+        <if test="startTime != null and startTime !=''">
+            and n.dayInt &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime !=''">
+            and n.dayInt &lt;= #{endTime}
+        </if>
+        <if test="userName != null and userName !=''">
+            and eu.userName like concat('%',#{userName},'%')
+        </if>
+    </select>
+
+    <select id="getConsumSumByAgentId" parameterType="java.lang.Long"
+            resultType="java.lang.Long">
+        SELECT
+            sum(t.count) AS total
+        FROM number_check_log t
+        where
+         t.`status`=1
+        and t.agent_id=#{agentId}
+        and type=1
+    </select>
+
+    <select id="getConsumSum"    resultType="java.lang.Long">
+        SELECT
+        sum(t.count) AS total
+        FROM number_check_log t
+        where
+        t.`status`=1
+        and type=1
+    </select>
+
+</mapper>

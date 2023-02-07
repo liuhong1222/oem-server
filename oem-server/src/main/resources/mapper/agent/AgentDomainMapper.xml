@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentDomainMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentDomain">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="agent_id" jdbcType="BIGINT" property="agentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="contact_info" jdbcType="VARCHAR" property="contactInfo"/>
+        <result column="licence" jdbcType="VARCHAR" property="licence"/>
+        <result column="copyright" jdbcType="VARCHAR" property="copyright"/>
+        <result column="icp_record" jdbcType="VARCHAR" property="icpRecord"/>
+        <result column="police_record" jdbcType="VARCHAR" property="policeRecord"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, agent_id, name, ip, address, licence, copyright, icp_record, police_record, create_time, 
+    update_time,contact_info
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from o_agent_domain
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_domain
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentDomain">
+    insert into o_agent_domain (id, agent_id, name, 
+      ip, address, licence, 
+      copyright, icp_record, police_record, 
+      create_time, update_time,contact_info)
+    values (#{id,jdbcType=BIGINT}, #{agentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR},
+      #{copyright,jdbcType=VARCHAR}, #{icpRecord,jdbcType=VARCHAR}, #{policeRecord,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},#{contactInfo,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentDomain">
+        insert into o_agent_domain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="licence != null">
+                licence,
+            </if>
+            <if test="copyright != null">
+                copyright,
+            </if>
+            <if test="icpRecord != null">
+                icp_record,
+            </if>
+            <if test="policeRecord != null">
+                police_record,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="contactInfo != null">
+                contact_info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="agentId != null">
+                #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="licence != null">
+                #{licence,jdbcType=VARCHAR},
+            </if>
+            <if test="copyright != null">
+                #{copyright,jdbcType=VARCHAR},
+            </if>
+            <if test="icpRecord != null">
+                #{icpRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="policeRecord != null">
+                #{policeRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactInfo != null">
+                #{contactInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentDomain">
+        update o_agent_domain
+        <set>
+            <if test="agentId != null">
+                agent_id = #{agentId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="licence != null">
+                licence = #{licence,jdbcType=VARCHAR},
+            </if>
+            <if test="copyright != null">
+                copyright = #{copyright,jdbcType=VARCHAR},
+            </if>
+            <if test="icpRecord != null">
+                icp_record = #{icpRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="policeRecord != null">
+                police_record = #{policeRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactInfo != null">
+                contact_info=#{contactInfo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentDomain">
+    update o_agent_domain
+    set agent_id = #{agentId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      licence = #{licence,jdbcType=VARCHAR},
+      copyright = #{copyright,jdbcType=VARCHAR},
+      icp_record = #{icpRecord,jdbcType=VARCHAR},
+      police_record = #{policeRecord,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      contact_info=#{contactInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByAgentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        t1.*
+        from o_agent_domain  t1 LEFT JOIN o_agent t2 on t1.agent_id=t2.id
+        where t1.agent_id = #{agentId}  and t2.delete_flag=1
+    </select>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.AgentTrdOrderIdMapper">
+  <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.AgentTrdOrderId">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trd_order_id" jdbcType="BIGINT" property="trdOrderId" />
+    <result column="cre_user_id" jdbcType="BIGINT" property="creUserId" />
+    <result column="cre_user_name" jdbcType="VARCHAR" property="creUserName" />
+    <result column="cre_user_phone" jdbcType="VARCHAR" property="creUserPhone" />
+    <result column="cre_user_type" jdbcType="TINYINT" property="creUserType" />
+    <result column="trd_order_price" jdbcType="DECIMAL" property="trdOrderPrice" />
+    <result column="trd_order_product_id" jdbcType="BIGINT" property="trdOrderProductId" />
+    <result column="trd_order_package_name" jdbcType="VARCHAR" property="trdOrderPackageName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="agent_id" jdbcType="BIGINT" property="agentId" />
+    <result column="agent_order_id" jdbcType="BIGINT" property="agentOrderId" />
+    <result column="agent_company_name" jdbcType="VARCHAR" property="agentCompanyName" />
+    <result column="agent_mobile" jdbcType="VARCHAR" property="agentMobile" />
+    <result column="updated" jdbcType="TINYINT" property="updated" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, trd_order_id, cre_user_id, cre_user_name, cre_user_phone, cre_user_type, trd_order_price, 
+    trd_order_product_id, trd_order_package_name, remark, agent_id, agent_order_id, agent_company_name, 
+    agent_mobile, updated, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_agent_trd_order_id
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_agent_trd_order_id
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.AgentTrdOrderId">
+    insert into o_agent_trd_order_id (id, trd_order_id, cre_user_id, 
+      cre_user_name, cre_user_phone, cre_user_type, 
+      trd_order_price, trd_order_product_id, trd_order_package_name, 
+      remark, agent_id, agent_order_id, 
+      agent_company_name, agent_mobile, updated, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{trdOrderId,jdbcType=BIGINT}, #{creUserId,jdbcType=BIGINT}, 
+      #{creUserName,jdbcType=VARCHAR}, #{creUserPhone,jdbcType=VARCHAR}, #{creUserType,jdbcType=TINYINT}, 
+      #{trdOrderPrice,jdbcType=DECIMAL}, #{trdOrderProductId,jdbcType=BIGINT}, #{trdOrderPackageName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{agentId,jdbcType=BIGINT}, #{agentOrderId,jdbcType=BIGINT}, 
+      #{agentCompanyName,jdbcType=VARCHAR}, #{agentMobile,jdbcType=VARCHAR}, #{updated,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.credit.oem.admin.modules.agent.entity.AgentTrdOrderId">
+    insert into o_agent_trd_order_id
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="trdOrderId != null">
+        trd_order_id,
+      </if>
+      <if test="creUserId != null">
+        cre_user_id,
+      </if>
+      <if test="creUserName != null">
+        cre_user_name,
+      </if>
+      <if test="creUserPhone != null">
+        cre_user_phone,
+      </if>
+      <if test="creUserType != null">
+        cre_user_type,
+      </if>
+      <if test="trdOrderPrice != null">
+        trd_order_price,
+      </if>
+      <if test="trdOrderProductId != null">
+        trd_order_product_id,
+      </if>
+      <if test="trdOrderPackageName != null">
+        trd_order_package_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="agentOrderId != null">
+        agent_order_id,
+      </if>
+      <if test="agentCompanyName != null">
+        agent_company_name,
+      </if>
+      <if test="agentMobile != null">
+        agent_mobile,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="trdOrderId != null">
+        #{trdOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="creUserId != null">
+        #{creUserId,jdbcType=BIGINT},
+      </if>
+      <if test="creUserName != null">
+        #{creUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="creUserPhone != null">
+        #{creUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creUserType != null">
+        #{creUserType,jdbcType=TINYINT},
+      </if>
+      <if test="trdOrderPrice != null">
+        #{trdOrderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="trdOrderProductId != null">
+        #{trdOrderProductId,jdbcType=BIGINT},
+      </if>
+      <if test="trdOrderPackageName != null">
+        #{trdOrderPackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="agentOrderId != null">
+        #{agentOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="agentCompanyName != null">
+        #{agentCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="agentMobile != null">
+        #{agentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.credit.oem.admin.modules.agent.entity.AgentTrdOrderId">
+    update o_agent_trd_order_id
+    <set>
+      <if test="trdOrderId != null">
+        trd_order_id = #{trdOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="creUserId != null">
+        cre_user_id = #{creUserId,jdbcType=BIGINT},
+      </if>
+      <if test="creUserName != null">
+        cre_user_name = #{creUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="creUserPhone != null">
+        cre_user_phone = #{creUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creUserType != null">
+        cre_user_type = #{creUserType,jdbcType=TINYINT},
+      </if>
+      <if test="trdOrderPrice != null">
+        trd_order_price = #{trdOrderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="trdOrderProductId != null">
+        trd_order_product_id = #{trdOrderProductId,jdbcType=BIGINT},
+      </if>
+      <if test="trdOrderPackageName != null">
+        trd_order_package_name = #{trdOrderPackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=BIGINT},
+      </if>
+      <if test="agentOrderId != null">
+        agent_order_id = #{agentOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="agentCompanyName != null">
+        agent_company_name = #{agentCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="agentMobile != null">
+        agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.credit.oem.admin.modules.agent.entity.AgentTrdOrderId">
+    update o_agent_trd_order_id
+    set trd_order_id = #{trdOrderId,jdbcType=BIGINT},
+      cre_user_id = #{creUserId,jdbcType=BIGINT},
+      cre_user_name = #{creUserName,jdbcType=VARCHAR},
+      cre_user_phone = #{creUserPhone,jdbcType=VARCHAR},
+      cre_user_type = #{creUserType,jdbcType=TINYINT},
+      trd_order_price = #{trdOrderPrice,jdbcType=DECIMAL},
+      trd_order_product_id = #{trdOrderProductId,jdbcType=BIGINT},
+      trd_order_package_name = #{trdOrderPackageName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=BIGINT},
+      agent_order_id = #{agentOrderId,jdbcType=BIGINT},
+      agent_company_name = #{agentCompanyName,jdbcType=VARCHAR},
+      agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryListByNotUpdated" resultMap="BaseResultMap">
+    select
+    t1.*
+    from o_agent_trd_order_id t1 LEFT join trd_order t2 on t1.trd_order_id=t2.id
+    where updated = 0 and trd_order_id is not null and agent_id is not null
+    and t2.pay_time is not null
+  </select>
+</mapper>

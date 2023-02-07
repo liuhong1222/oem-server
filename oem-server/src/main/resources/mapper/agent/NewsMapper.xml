@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.oem.admin.modules.agent.dao.NewsMapper">
+    <resultMap id="BaseResultMap" type="com.credit.oem.admin.modules.agent.entity.News">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="agent_id" jdbcType="BIGINT" property="agentId"/>
+        <result column="cre_user_id" jdbcType="VARCHAR" property="creUserId"/>
+        <result column="createdate" jdbcType="DATE" property="createdate"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="newsContent" jdbcType="VARCHAR" property="newsContent"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="createby" jdbcType="VARCHAR" property="createby"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="lastrepair" jdbcType="VARCHAR" property="lastrepair"/>
+        <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime"/>
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime"/>
+        <result column="audit_remark" jdbcType="VARCHAR" property="auditRemark"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.credit.oem.admin.modules.agent.entity.News">
+        <result column="message" jdbcType="LONGVARCHAR" property="message"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, agent_id, cre_user_id, createdate, title, flag, createby,
+    createtime,lastrepair,lasttime,audit_time,audit_remark
+  </sql>
+    <sql id="Blob_Column_List">
+    message
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from news
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <insert id="insert" parameterType="com.credit.oem.admin.modules.agent.entity.News">
+    insert into news (id,agent_id, cre_user_id, createdate,
+      title, flag, createby, newsContent,
+      createtime, lastrepair, lasttime,
+      audit_time,audit_remark,
+      message)
+    values (#{id,jdbcType=VARCHAR},#{agentId,jdbcType=BIGINT}, #{creUserId,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE},
+      #{title,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{createby,jdbcType=VARCHAR}, #{newsContent,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastrepair,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP},
+      #{auditTime,jdbcType=TIMESTAMP}, #{auditRemark,jdbcType=VARCHAR},
+      #{message,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.credit.oem.admin.modules.agent.entity.News">
+        insert into news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+
+            <if test="creUserId != null">
+                cre_user_id,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="createby != null">
+                createby,
+            </if>
+            <if test="newsContent != null">
+                newsContent,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="lastrepair != null">
+                lastrepair,
+            </if>
+            <if test="lasttime != null">
+                lasttime,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+            <if test="auditRemark != null">
+                audit_remark,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+
+            <if test="agentId != null">
+                #{agentId,jdbcType=BIGINT},
+            </if>
+
+            <if test="creUserId != null">
+                #{creUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=DATE},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="createby != null">
+                #{createby,jdbcType=VARCHAR},
+            </if>
+            <if test="newsContent != null">
+                #{newsContent,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastrepair != null">
+                #{lastrepair,jdbcType=VARCHAR},
+            </if>
+            <if test="lasttime != null">
+                #{lasttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditRemark != null">
+                #{auditRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectNewsByCreateAndTitle" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        id,agent_id, cre_user_id, createdate,
+        title, flag, createby,
+        createtime, lastrepair, lasttime,
+        message
+        from news
+        where title=#{title,jdbcType=LONGVARCHAR}
+        and createby= #{createby}
+        order by createtime desc
+        limit 1
+    </select>
+
+
+    <select id="queryNewsList"
+            parameterType="com.credit.oem.admin.modules.agent.model.param.NewsInfoParam"
+            resultType="com.credit.oem.admin.modules.agent.model.data.NewsInfoData">
+        select news.id,ag.company_name as agentName,news.title,
+        news.lasttime as commitTime,
+        news.audit_time as auditTime,
+        news.flag as auditState,
+        news.audit_remark as auditRemark
+        from news
+        INNER JOIN o_agent as ag on news.agent_id = ag.id
+        where 1=1
+        <if test="agentId != null and agentId !=''">
+            and ag.id= #{agentId}
+        </if>
+        <if test="agentName != null and agentName !=''">
+            and ag.company_name like concat('%',#{agentName},'%')
+        </if>
+        <if test="auditState != null and auditState !='' or auditState==0 ">
+            and news.flag= #{auditState}
+        </if>
+        <if test="agentMobile!=null and  agentMobile!=''">
+            and ag.mobile like concat('%',#{agentMobile},'%')
+        </if>
+        order by news.lasttime desc
+    </select>
+
+    <update id="auditNews" parameterType="java.util.Map">
+        update news
+        <set>
+            flag = #{auditState,jdbcType=INTEGER},
+            audit_time = NOW(),
+            <if test="auditRemark != null and auditRemark !=''">
+                audit_remark = #{auditRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR} and flag in (0,2);
+    </update>
+
+    <update id="deleteNews" parameterType="java.util.Map">
+        update news
+        <set>
+            flag = -1,
+            audit_time = NOW()
+        </set>
+        where id = #{id,jdbcType=VARCHAR} and flag &lt;&gt; -1
+        <if test="agentId!=null and  agentId!=''">
+            and agent_id = #{agentId}
+        </if>
+    </update>
+
+
+    <select id="countByCreateByWithinSeconds" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(0)
+        from news
+        where createby= #{createby} and TIMESTAMPDIFF(SECOND,news.createtime,NOW()) &lt; #{seconds,jdbcType=BIGINT}
+    </select>
+
+    <update id="modifyNews" parameterType="com.credit.oem.admin.modules.agent.entity.News">
+        update news
+        <set>
+            title = #{title,jdbcType=VARCHAR},
+            newsContent = #{newsContent,jdbcType=VARCHAR},
+            message = #{message,jdbcType=LONGVARCHAR},
+            flag = #{flag,jdbcType=INTEGER},
+            lastrepair = #{lastrepair,jdbcType=VARCHAR},
+            lasttime = #{lasttime,jdbcType=TIMESTAMP},
+            audit_time = null,
+            audit_remark = null
+        </set>
+        where id = #{id,jdbcType=VARCHAR} and flag in (0,1,2,3)
+    </update>
+
+</mapper>
